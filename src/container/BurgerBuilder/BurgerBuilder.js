@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import Ordersummary from "../../components/Burger/Ordersummary/Ordersummary";
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -12,14 +14,25 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      salad: 1,
-      meat: 1,
-      cheese: 1,
-      bacon: 1,
+      salad: 0,
+      meat: 0,
+      cheese: 0,
+      bacon: 0,
     },
     totalPrice: 4,
+    purchaseable: false,
   };
 
+  updatePurchaseState = ingredients => {
+    const sum = Object.keys(ingredients)
+      .map(igKey => {
+        return ingredients[igKey];
+      })
+      .reduce((sum, el) => {
+        return sum + el;
+      }, 0);
+    this.setState({ purchaseable: sum > 0 });
+  };
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
     const updatedCount = oldCount + 1;
@@ -31,6 +44,7 @@ class BurgerBuilder extends Component {
     const newPrice = oldPrice + priceAddition;
 
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updatePurchaseState(updatedIngredients);
   };
   removeIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
@@ -44,6 +58,7 @@ class BurgerBuilder extends Component {
     const newPrice = oldPrice - priceAddition;
 
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updatePurchaseState(updatedIngredients);
   };
   render() {
     const disabledInfo = {
@@ -54,12 +69,16 @@ class BurgerBuilder extends Component {
     }
     return (
       <Fragment>
+        <Modal>
+          <Ordersummary ingredients={this.state.ingredients} />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           disabled={disabledInfo}
           price={this.state.totalPrice}
+          purchaseable={this.state.purchaseable}
         />
       </Fragment>
     );
