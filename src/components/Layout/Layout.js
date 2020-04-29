@@ -5,13 +5,17 @@ import Toolbar from "../Navigation/Toolbar/Toolbar";
 import Sidedrawer from "../Navigation/Sidedrawer/Sidedrawer";
 
 const Layout = props => {
-  const [showSideDrawer, setShowSideDrawer] = useState(true);
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
   const sideDrawerClosedHandler = () => {
+    setShowSideDrawer(false);
+  };
+
+  const sideDrawerToggleHandler = () => {
     setShowSideDrawer(!showSideDrawer);
   };
   return (
     <Fragment>
-      <Toolbar />
+      <Toolbar toggleSideDrawer={sideDrawerToggleHandler} />
       <Sidedrawer open={showSideDrawer} closed={sideDrawerClosedHandler} />
       <div>Toolbar,Sidedrawer,Backdrop</div>
       <div>Almost before we knew it, we had left the ground.</div>
