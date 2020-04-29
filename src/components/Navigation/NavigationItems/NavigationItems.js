@@ -10,8 +10,6 @@ const NavigationItems = () => {
         BurgerBuilder
       </NavigationItem>
       <NavigationItem>Checkout</NavigationItem>
-      <NavigationItem>Login</NavigationItem>
-      <NavigationItem>Buy</NavigationItem>
     </ul>
   );
 };

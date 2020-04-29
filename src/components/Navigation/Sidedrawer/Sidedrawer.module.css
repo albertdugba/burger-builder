@@ -10,6 +10,12 @@
   padding: 2rem 1rem;
   box-sizing: border-box;
   transition: transform 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.Logo {
+  height: 100%;
 }
 
 @media (min-width: 500px) {
