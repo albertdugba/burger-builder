@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+
 import BurgerIngredients from "./BurgerIngredients/BurgerIngredients";
 
 import classes from "./Burger.module.css";
@@ -27,4 +29,4 @@ const Burger = props => {
   );
 };
 
-export default Burger;
+export default withRouter(Burger);

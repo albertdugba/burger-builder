@@ -24,10 +24,10 @@ const withErrorHandler = (WrappedComponent, axiosInstance) => {
       this.setState({ error: null });
     };
 
-    componentWillUnmount() {
-      axiosInstance.request.eject(this.requestInterceptor);
-      axiosInstance.response.eject(this.responseInterceptor);
-    }
+    // componentWillUnmount() {
+    //   axiosInstance.request.eject(this.requestInterceptor);
+    //   axiosInstance.response.eject(this.responseInterceptor);
+    // }
 
     render() {
       return (
