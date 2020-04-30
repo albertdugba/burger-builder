@@ -4,7 +4,10 @@ import CheckoutSummary from "../../../components/Order/CheckoutSummary/CheckoutS
 class Checkout extends Component {
   state = {
     ingredients: {
-      meat: 4,
+      meat: 1,
+      salad: 2,
+      cheese: 2,
+      bacon: 3,
     },
   };
 
@@ -15,6 +18,14 @@ class Checkout extends Component {
   checkoutContinuedHandler = () => {
     this.props.history.replace("/checkout/contact-info");
   };
+
+  componentDidMount() {
+    const query = new URLSearchParams(this.props.location.search);
+    const ingredients = {};
+    for (let param of query.entries()) ingredients[param[0]] = +param[1];
+    this.setState({ ingredients: ingredients });
+  }
+
   render() {
     return (
       <div>
