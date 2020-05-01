@@ -18,7 +18,7 @@ const Layout = props => {
       <Toolbar toggleSideDrawer={sideDrawerToggleHandler} />
       <Sidedrawer open={showSideDrawer} closed={sideDrawerClosedHandler} />
       <div>Toolbar,Sidedrawer,Backdrop</div>
-      <div>Almost before we knew it, we had left the ground.</div>
+
       <main className={classes.Content}>{props.children}</main>
     </Fragment>
   );
