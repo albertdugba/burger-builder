@@ -17,6 +17,7 @@ class ContactInfo extends Component {
   };
 
   orderHandler = event => {
+    console.log(this.props.price);
     event.preventDefault();
     this.setState({ loading: true });
     const orders = {

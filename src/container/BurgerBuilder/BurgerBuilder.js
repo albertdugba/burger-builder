@@ -90,7 +90,6 @@ class BurgerBuilder extends Component {
       pathname: "/checkout",
       search: "?" + queryString,
     });
-    console.log(this.props);
   };
 
   componentDidMount() {
