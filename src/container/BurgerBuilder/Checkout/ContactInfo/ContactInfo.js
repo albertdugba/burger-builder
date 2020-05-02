@@ -4,35 +4,73 @@ import axiosInstance from "../../../../axios-orders";
 
 import classes from "./ContactInfo.module.css";
 import Spinner from "../../../../components/UI/Spinner/Spinner";
+import Input from "../../../../components/UI/Input/Input";
 
 class ContactInfo extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: "",
+    orderForm: {
+      name: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Name",
+        },
+        value: "",
+      },
+      street: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Street",
+        },
+        value: "",
+      },
+
+      zipCode: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Zip Code",
+        },
+        value: "",
+      },
+      country: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Country",
+        },
+        value: "",
+      },
+      email: {
+        elementType: "input",
+        elementConfig: {
+          type: "text",
+          placeholder: "Your Mail",
+        },
+        value: "",
+      },
+      deliveryMethod: {
+        elementType: "select",
+        elementConfig: {
+          options: [
+            { value: "fastest", displayValue: "Fastest" },
+            { value: "cheapest", displayValue: "Cheapest" },
+          ],
+        },
+        value: "",
+      },
     },
+
     loading: false,
   };
 
   orderHandler = event => {
-    console.log(this.props.price);
     event.preventDefault();
     this.setState({ loading: true });
     const orders = {
       ingredients: this.props.ingredients,
       price: this.props.price,
-      customer: {
-        name: "Kent",
-        address: {
-          street: "Sesame Street",
-          zipCode: "12321",
-          country: "Ghana",
-        },
-        email: "test@test.com",
-      },
-      deliveryMethod: "fastest",
     };
     axiosInstance
       .post("/orders.json", orders)
@@ -47,33 +85,26 @@ class ContactInfo extends Component {
       });
   };
   render() {
+    const formElementArr = [];
+    for (let key in this.state.orderForm) {
+      formElementArr.push({
+        id: key,
+        config: this.state.orderForm[key],
+      });
+    }
+
     let form = (
       <form>
-        <input
-          type="text"
-          className={classes.Input}
-          name="name"
-          placeholder="Your Name"
-        />
-        <input
-          type="email"
-          className={classes.Input}
-          name="email"
-          placeholder="Your Mail"
-        />
-        <input
-          type="text"
-          className={classes.Input}
-          name="street"
-          placeholder="Street"
-        />
-        <input
-          type="text"
-          className={classes.Input}
-          name="postal"
-          placeholder="Postal Code"
-        />
-        <Button btnType="Success" clicked={this.orderHandler}>
+        {/* <Input elementType={} elementConfig={} value={} /> */}
+        {formElementArr.map(formElement => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+          />
+        ))}
+        <Button inputType="input" btnType="Success" clicked={this.orderHandler}>
           ORDER
         </Button>
       </form>
