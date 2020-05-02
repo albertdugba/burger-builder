@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import Button from "../../../../components/UI/Button/Button";
 import axiosInstance from "../../../../axios-orders";
 
@@ -24,7 +23,7 @@ class ContactInfo extends Component {
       ingredients: this.props.ingredients,
       price: this.props.price,
       customer: {
-        name: "Bernice",
+        name: "Kent",
         address: {
           street: "Sesame Street",
           zipCode: "12321",
