@@ -86,9 +86,11 @@ class ContactInfo extends Component {
           ],
         },
         value: "",
+        valid: true,
+        validation: {},
       },
     },
-
+    formIsValid: false,
     loading: false,
   };
 
@@ -120,6 +122,10 @@ class ContactInfo extends Component {
 
   checkFormValidation = (value, rules) => {
     let isValid = true;
+    if (!rules) {
+      return true;
+    }
+
     if (rules.required) {
       isValid = value.trim() !== " " && isValid;
     }
@@ -145,9 +151,12 @@ class ContactInfo extends Component {
     );
     updatedOrderForm[inputId] = updatedFormEl;
 
-    this.setState({ orderForm: updatedOrderForm });
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
 
-    console.log(updatedFormEl);
+    this.setState({ orderForm: updatedOrderForm, formIsValid });
   };
   render() {
     const formElementArr = [];
@@ -172,7 +181,11 @@ class ContactInfo extends Component {
             changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <Button inputType="input" btnType="Success" clicked={this.orderHandler}>
+        <Button
+          inputType="input"
+          btnType="Success"
+          disabled={!this.state.formIsValid}
+        >
           ORDER
         </Button>
       </form>
