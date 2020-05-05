@@ -2,9 +2,9 @@ import React, { Fragment, Component } from "react";
 import Button from "../../UI/Button/Button";
 
 class Ordersummary extends Component {
-  componentWillUpDatet() {
-    console.log("[OderSummary Will Update]");
-  }
+  // componentWillUpDatet() {
+  //   console.log("[OderSummary Will Update]");
+  // }
 
   render() {
     const ingredientSummary = Object.keys(this.props.ingredients).map(igKey => {
