@@ -12,8 +12,7 @@ import withErrorHandler from "./hoc/withErrorHandler";
 
 class BurgerBuilder extends Component {
   state = {
-    loading: false,
-    error: false,
+    purchaseMode: false,
   };
 
   purchaseModeHandler = () => {
@@ -36,6 +35,7 @@ class BurgerBuilder extends Component {
   };
 
   purchaseContinueHandler = () => {
+    this.props.onInitPurchased();
     this.props.history.push("/checkout");
   };
 
@@ -101,6 +101,7 @@ const mapStateToProps = state => {
   return {
     ings: state.burgerBuilder.ingredients,
     price: state.burgerBuilder.totalPrice,
+    orders: state.orderReducer.orders,
     error: state.burgerBuilder.error,
   };
 };
@@ -113,6 +114,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(burgerBuilderActions.removeIngredient(name)),
 
     onInitIngredients: () => dispatch(burgerBuilderActions.initIngredients()),
+    onInitPurchased: () => dispatch(burgerBuilderActions.purchaseInit()),
   };
 };
 

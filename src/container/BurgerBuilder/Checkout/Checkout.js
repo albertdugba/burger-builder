@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import * as actions from "../../../store/actions/index";
 import CheckoutSummary from "../../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactInfo from "./ContactInfo/ContactInfo";
 class Checkout extends Component {
@@ -13,9 +12,6 @@ class Checkout extends Component {
   checkoutContinuedHandler = () => {
     this.props.history.replace("/checkout/contact-info");
   };
-  componentWillMount() {
-    this.props.onPurchaseInit();
-  }
 
   render() {
     let summary = <Redirect to="/" />;
@@ -47,14 +43,8 @@ class Checkout extends Component {
 const mapStateToProps = state => {
   return {
     ings: state.burgerBuilder.ingredients,
-    price: state.burgerBuilder.totalPrice,
     purchased: state.orderReducer.purchased,
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onPurchaseInit: () => dispatch(actions.purchaseInit()),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps)(Checkout);

@@ -28,6 +28,7 @@ const Order = props => {
       {"  "} {ig.name} {"   "}({ig.amount})
     </span>
   ));
+
   return (
     <div className={classes.Order}>
       <p>Ingredients: {ingredientOutput}</p>
