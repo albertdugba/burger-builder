@@ -11,6 +11,7 @@ const NavigationItems = () => {
       </NavigationItem>
       <NavigationItem link="/orders">Orders</NavigationItem>
       <NavigationItem link="/checkout">Checkout</NavigationItem>
+      <NavigationItem link="/auth">Authenticate</NavigationItem>
     </ul>
   );
 };
