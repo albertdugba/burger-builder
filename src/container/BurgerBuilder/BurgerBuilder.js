@@ -12,6 +12,7 @@ import withErrorHandler from "./hoc/withErrorHandler";
 
 const BurgerBuilder = props => {
   const [purchaseMode, setPurchaseMode] = useState(false);
+
   const { onInitIngredients } = props;
   useEffect(() => {
     onInitIngredients();

@@ -10,7 +10,6 @@ const controls = [
 ];
 
 const BuildControls = props => {
-  console.log(props.isAuth);
   return (
     <div className={classes.BuildControls}>
       <h4>Current Price: {props.price.toFixed(2)}</h4>

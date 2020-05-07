@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import CheckoutSummary from "../../../components/Order/CheckoutSummary/CheckoutSummary";
 import ContactInfo from "./ContactInfo/ContactInfo";
+
 const Checkout = props => {
   const checkoutCancelledHandler = () => {
     props.history.goBack();
@@ -21,12 +22,12 @@ const Checkout = props => {
       <Fragment>
         {purchasedRedirect}
         <CheckoutSummary
-          ingredients={this.props.ings}
+          ingredients={props.ings}
           checkoutCancelled={checkoutCancelledHandler}
           checkoutContinued={checkoutContinuedHandler}
         />
         <Route
-          path={this.props.match.path + "/contact-info"}
+          path={props.match.path + "/contact-info"}
           component={ContactInfo}
         />
       </Fragment>
